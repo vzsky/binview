@@ -1,0 +1,16 @@
+{
+  "name": "binview",
+  "version": "1.0.0",
+  "author": "my99n",
+  "license": "MIT",
+  "main": "src/main.js",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "lodash": "^4.17.21",
+    "macd": "^1.0.2",
+    "node-binance-api": "^0.12.4"
+  },
+  "scripts": {
+    "dev": "node src/dev.js"
+  }
+}
