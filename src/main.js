@@ -9,10 +9,10 @@ const binance = new Binance().options({
   APISECRET: process.env.APISECRET
 });
 
-const CheckSignal = (symbol, interval) => {
+const CheckSignal = (symbol, interval, callback) => {
   binance.candlesticks(symbol, interval, (error, ticks, symbol) => {
     candle = _.map(ticks, (p) => (average({open:p[1], close:p[4]})));
-    macdSignal(symbol, interval, candle)        
+    if (macdSignal(symbol, interval, candle)) callback("MACD", symbol, interval)
   }, {limit: 100});
 }
 
