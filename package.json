@@ -11,6 +11,6 @@
     "node-binance-api": "^0.12.4"
   },
   "scripts": {
-    "dev": "node src/dev.js"
+    "test": "node src/test.js"
   }
 }

@@ -6,7 +6,12 @@ const average = (position) => {
 
 const sign = (number) => { return number > 0 }
 
+const errorHandler = (error) => {
+  console.log(error)
+}
+
 module.exports = {
   average, 
   sign,
+  errorHandler,
 }
