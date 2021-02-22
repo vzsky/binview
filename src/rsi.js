@@ -1,7 +1,7 @@
-const { errorHandler, sign } = require("./utils");
+const { sign } = require("./utils");
 
-const rsi_indicator = (close, period = 14) => {
-  if (close.length < period+1) throw Error("Not enough data");
+const rsi_indicator = async (close, period = 14) => {
+  if (close.length < period+1) throw Error("not enough data");
   close = close.slice(close.length - period-1)
   let up = 0, down = 0, upCnt = 0, downCnt = 0;
   for (let i in close) {
@@ -23,18 +23,18 @@ const rsi_indicator = (close, period = 14) => {
   return 100 - (100/(1+RS))
 }
 
-const rsiSignal = (symbol, interval, chart, callback) => {
+const rsiSignal = async (chart) => {
   try {
     let close = chart.map(p => parseFloat(p.close))
-    let rsi = rsi_indicator(close, 14)
-    if (rsi > 80) {
-      callback("RSI overbought (SELL)", symbol, interval)
-    }
-    if (rsi < 20) {
-      callback("RSI oversold (BUY)", symbol, interval)
-    }
+    let rsi = await rsi_indicator(close, 14)
+    let res = ""
+    if (rsi > 80) 
+      res = "RSI overbought (SELL)"
+    if (rsi < 20) 
+      res = "RSI oversold (BUY)"
+    return res
   } catch (error) {
-    errorHandler(`RSI [${interval}] ${symbol}: ERROR - ${error.message}`)
+    throw new Error(`RSI | ${error.message}`)
   }
 } 
 
