@@ -35,8 +35,33 @@ const CheckSignal = (symbol, interval) => (
     }, {limit: 100});
   })
 )
+
+const CheckSymbol = async (symbol) => {
+  intervals = ['15m', '1h', '4h', '1d']
+  promises = []
+  for (let i in intervals) {
+    promises.push(CheckSignal(symbol, intervals[i]))
+  }
+  let resolved = await Promise.all(promises)
+  let result = {}
+  for (let i in intervals) {
+    result[intervals[i]] = resolved[i]
+  }
+  return result;
+}
+
+const CheckSymbols = async (symbols) => {
+  let promises = []
+  for (let symbol of symbols) {
+    promises.push(CheckSymbol(symbol))
+  }
+  let resolved = await Promise.all(promises)
+  return resolved
+}
   
 
 module.exports = {
-  CheckSignal
+  CheckSignal,
+  CheckSymbol,
+  CheckSymbols
 }
