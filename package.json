@@ -1,6 +1,6 @@
 {
-  "name": "binview",
-  "version": "1.0.0",
+  "name": "binanceview",
+  "version": "1.0.1",
   "author": "my99n",
   "license": "MIT",
   "main": "src/main.js",
